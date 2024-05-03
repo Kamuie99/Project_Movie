@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="select_movie">
+  <h1><span>|</span> Movies</h1>
+  <form id="genre-form">
+    <select id="genre" name="genre">
+      <option value="">장르를 선택하시오.</option>
+      {% for genre in genres %}
+        <option value="{{ genre.id }}">{{ genre.name }}</option>
+      {% endfor %}
+    </select>
+  </form>
+</div>
+  <div id="movie-list">
+    {% for movie in movies %}
+    <div class="movie_box">
+      <img src="{{movie.poster_path}}" alt="응애"></img>
+      <div class="movie_about">
+        <p class="title">{{ movie.title }}</p>
+        <div class="movie_info">
+          <p><span>개봉일 | </span> {{ movie.release_date }}</p>
+          <p><span>인기도 | </span> {{ movie.popularity }}</p>
+          <p><span>투표수 | </span>{{ movie.vote_count }}</p>
+          <p><span>별점 | </span>{{ movie.vote_average }}</p>
+        </div>
+        <p class="overview"><span>줄거리 | </span>{% if movie.overview %}
+          {{ movie.overview }} {% else %} 줄거리 정보가 없습니다. {% endif %}</p>
+
+      </div>
+      <hr>
+    </div>
+    {% endfor %}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const formTag = document.querySelector('#genre-form');
+    const movieList = document.querySelector('#movie-list');
+
+    formTag.addEventListener('change', function(event) {
+      event.preventDefault()
+      let selectedGenre = event.target.value
+      
+      axios({
+        method: 'get',
+        url: "{% url 'movies:filter_genre'%}",
+        params: { genre_id: selectedGenre },
+      })
+      .then((res) => {
+        const movies = res.data;
+        updateMovieList(movies);
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    })
+
+    function updateMovieList(movies) {
+      movieList.innerHTML = '';
+
+      movies.forEach(movie => {
+        const movieElement = document.createElement('div') 
+
+        movieElement.innerHTML = `
+        <div class="movie_box">
+          <img src="${movie.poster_path}" alt="${movie.title}">
+          <div class="movie_about">
+            <p class="title">${movie.title}</p>
+            <div class="movie_info">
+              <p><span>개봉일 | </span> ${movie.release_date}</p>
+              <p><span>인기도 | </span>${movie.popularity}</p>
+              <p><span>투표수 | </span>${movie.vote_count}</p>
+              <p><span>별점 | </span>${movie.vote_average}</p>
+            </div>
+            <p class="overview"><span>줄거리 | </span>${movie.overview ? movie.overview : '줄거리 정보가 없습니다.'}</p>
+          </div>
+          <hr>
+        </div>
+        `;
+        movieList.appendChild(movieElement)
+      })
+    }
+  </script>
+{% endblock %}
+  

@@ -1,0 +1,69 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  align-items: center;
+}
+
+.header a {
+  text-decoration: none;
+  color: inherit;
+  margin-right: 10px;
+}
+.header a:hover {
+  color: #3297CE;
+}
+
+.profile_logout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile_logout h3 {
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+.profile_logout span {
+  color: #3297CE;
+}
+
+.profile_logout a {
+  padding: 5px 10px;
+  border: 2px solid #3297CE;
+  border-radius: 10px;
+}
+
+.profile_logout input {
+  background-color: white;
+  border: 2px solid #3297CE;
+  padding: 5px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.profile_logout input:hover {
+  color: #3297CE;
+}
+
+.nav_buttons a {
+  margin-right: 30px;
+  text-decoration: none;
+  color: inherit;
+}

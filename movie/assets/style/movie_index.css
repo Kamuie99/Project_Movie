@@ -1,0 +1,66 @@
+.select_movie {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%;
+}
+
+.select_movie select {
+  margin-left: 50px;
+  padding: 10px 15px;
+  border: 2px solid gray;
+  border-radius: 10px;
+}
+
+.select_movie select:hover {
+  border: 2px solid #3297CE;
+}
+
+.select_movie select:focus {
+  border: 2px solid #3297CE;
+}
+
+.movie_box {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  height: 350px;
+  margin-bottom: 40px;
+
+  border: 1px solid #3297CE;
+  border-radius: 10px;
+}
+.movie_box img {
+  width: 200px;
+  height: 300px;
+}
+.movie_about {
+  margin-left: 40px;
+}
+.movie_info {
+  display: flex;
+  flex-direction: column;
+}
+.movie_info p {
+  margin-right: 10px;
+}
+
+.overview {
+  max-height: 4.5em; /* 세 줄 이상일 때 최대 높이 */
+  overflow: hidden; /* 넘치는 부분을 숨김 */
+  text-overflow: ellipsis; /* 넘치는 부분을 ...으로 표시 */
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+span {
+  color: #3297CE;
+  font-weight: bold;
+}

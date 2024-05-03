@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile">
+  <h1 class="profile_title"><span>{{ person.username }}</span> 프로필 페이지</h1>
+  <hr>
+  <div>
+    <div class="following">
+      팔로잉 : <span>{{ person.followings.all|length }}</span> <span>|</span> 팔로워 : <span>{{ person.followers.all|length }}</span>
+    </div>
+    {% if request.user != person %}
+      <div>
+        <form action="{% url 'accounts:follow' person.pk %}" method="POST">
+          {% csrf_token %}
+          {% if request.user in person.followers.all %}
+            <input type="submit" value="Unfollow">
+          {% else %}
+            <input type="submit" value="Follow">
+          {% endif %}
+        </form>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

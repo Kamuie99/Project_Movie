@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="community_title"><span>|</span> Community</h1>
+
+  {% for review in reviews %}
+  <div class="contents">
+    <div class="header_contents">
+      <div class="contents_intro">
+        <p>{{ review.pk }} <span>|</span></p>
+        <p class="review_title"><a href="{% url 'community:detail' review.pk %}">{{review.title}}</a></p>
+      </div>
+      <div class="like_func">
+        <p>
+          <span>{{ review.like_users.all|length }}</span> 명이 이 글을 좋아합니다.
+        </p>
+        <form action="{% url 'community:like' review.pk %}" method="POST">
+          {% csrf_token %}
+          {% if request.user in review.like_users.all %}
+            <input class="like_button" type="submit" value="좋아요 취소">
+          {% else %}
+            <input class="like_button" type="submit" value="좋아요">
+          {% endif %}
+        </form>
+      </div>
+    </div>
+    <p>작성자 : <a class="link_to" href="{% url 'accounts:profile' review.user.username %}">{{ review.user }}</a></p>
+    <p>{{ review.content }}</p>
+  </div>
+
+  {% endfor %}
+{% endblock %}

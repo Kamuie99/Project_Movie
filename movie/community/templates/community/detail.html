@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="detail_title_container">
+    <a class="home_button" href="{% url 'community:index' %}"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0,0,300,150">
+      <g fill="#3297ce" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(8.53333,8.53333)"><path d="M15,2c-0.26138,0.00002 -0.51237,0.10237 -0.69922,0.28516l-10.9082,8.92187c-0.0126,0.00947 -0.02497,0.01924 -0.03711,0.0293l-0.03711,0.03125v0.00195c-0.20274,0.18887 -0.31802,0.45339 -0.31836,0.73047c0,0.55228 0.44772,1 1,1h1v11c0,1.105 0.895,2 2,2h16c1.105,0 2,-0.895 2,-2v-11h1c0.55228,0 1,-0.44772 1,-1c0.0002,-0.27776 -0.11513,-0.54309 -0.31836,-0.73242l-0.01562,-0.01172c-0.02194,-0.01988 -0.04475,-0.03878 -0.06836,-0.05664l-1.59766,-1.30664v-3.89258c0,-0.552 -0.448,-1 -1,-1h-1c-0.552,0 -1,0.448 -1,1v1.43945l-6.32227,-5.17187c-0.18422,-0.17125 -0.42621,-0.26679 -0.67773,-0.26758zM18,15h4v8h-4z"></path></g></g>
+      </svg></a>
+    <h3>{{ review.pk }} <span>|</span></h3>
+    <p class="detail_title_2">{{ review.title }}</p>
+    <p class="time">작성 시각: {{ review.created_at }}</p>
+    <p class="time">수정 시각: {{ review.updated_at }}</p>
+  </div>
+  <div class="review_contents">
+    <p>영화 <span>|</span> {{ review.movie_title }}</p>
+    <p>평점 <span>|</span> {{ review.rank }}</p>
+    <p>내용 <span>|</span> {{ review.content }}</p>
+  </div>
+  <div class="review_comments">
+    <div class="comments_header">
+      <h4><span>Comments</h4>
+      {% if comments|length %}
+        <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p>
+      {% endif %}
+    </div>
+
+    <div class="user_comments">
+      {% for comment in comments %}
+        <div>
+          {{ comment.user }} <span>|</span> {{ comment.content }}
+        </div>
+        <hr>
+      {% empty %}
+        <p>아직 작성된 댓글이 없어요..</p>
+        <hr>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div>
+
+  </div>
+  {% if user.is_authenticated %}
+    <form action="{% url 'community:create_comment' review.pk %}" method="POST">
+      {% csrf_token %}
+      {{ request.user }}: {{ comment_form }}
+      <input class="comment_button" type="submit">
+    </form>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
+  {% endif %}
+{% endblock  %}

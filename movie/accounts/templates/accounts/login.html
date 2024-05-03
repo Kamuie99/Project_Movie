@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="login_container">
+  <div class="login_inner">
+    <h1 class="login_title">Search Movie</h1>
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input class="login_button" type="submit" value="로그인">
+    </form>
+  </div>
+</div>
+{% endblock  %}

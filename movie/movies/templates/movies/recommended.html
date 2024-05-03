@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Recommended</h1>
+  <form id="recommended-form">
+    <select id="startDateTime" name="startDateTime">
+      <option value="">개봉년도</option>
+      {% for year in years %}
+      <option value="{{year}}">{{year}}</option>
+      {% endfor %}
+    </select>
+    <select id="movieTypeId" name="movieTypeId">
+      <option value="">장르</option>
+      {% for genre in genres %}
+        <option value="{{genre.id}}">{{genre.name}}</option>
+      {% endfor %}
+    </select>
+  </form>
+  <div id="movie-list"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    //const openStartDt = '2022'
+    let curPage = '1'
+    const itemPerPage = '15'
+    // const movieTypeCd = ''
+    
+    const formTag = document.querySelector('#recommended-form')
+    const movieListDiv = document.querySelector('#movie-list')
+
+    {% comment %} formTag.addEventListener('change', function(event) {
+      event.preventDefault()
+      let selectedDT = document.querySelector('#startDateTime').value
+      let selectedMovieTypeId = document.querySelector('#movieTypeId').value
+    })
+    axios({
+      method: 'get',
+      url: "{% url 'movies:recommended' %}",
+      params: {
+        openStartDt: selectedDT,
+        movieTypeCd: selectedMovieTypeId,
+        // openEndDt,
+        curPage,
+        itemPerPage,
+      }
+    })
+    .then(response => {
+      const movies = response.data
+      movies.forEach(movie => {
+        const movieElem = document.createElement('div')
+        movieElem.innerHTML = `
+          <h2>${movie.title}</h2>
+          <p>Release Date: ${movie.release_date}</p>
+          <p>Popularity: ${movie.popularity}</p>
+          <p>Vote Count: ${movie.vote_count}</p>
+          <p>Vote Average: ${movie.vote_average}</p>
+          <p>Overview: ${movie.overview}</p>
+          <hr>
+        `
+        movieListDiv.appendChild(movieElem);
+      })
+    })
+    .catch(error => {
+      console.log(error)
+    }) {% endcomment %}
+  </script>
+{% endblock %}

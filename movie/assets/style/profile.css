@@ -1,0 +1,31 @@
+.profile_title {
+  font-size: 28px;
+}
+
+.profile {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #3297CE;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile span {
+  color: #3297CE;
+}
+
+.profile hr {
+  color: #3297CE;
+}
+
+.profile h1 {
+  margin-left: 10px;
+}
+
+.following span {
+  color: #3297CE;
+}

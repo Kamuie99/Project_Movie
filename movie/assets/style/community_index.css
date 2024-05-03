@@ -1,0 +1,57 @@
+.community_title {
+  font-family: Arial, sans-serif;
+  font-size: 35px;
+  padding: 15px;
+}
+
+.contents {
+  padding: 15px;
+  border: 1px solid #3297CE;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.review_title {
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.review_title a {
+  text-decoration: none;
+  color: #3297CE;
+}
+
+.header_contents {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.link_to {
+  text-decoration: none;
+  color: #3297CE;
+}
+
+.like_func {
+  display: flex;
+  flex-direction: row;
+  margin-left: 300px;
+}
+
+.like_func p {
+  margin-right: 20px;
+}
+
+.contents_intro {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.like_button {
+  background-color: white;
+  color: #3297CE;
+  border: 1px solid #3297CE;
+  border-radius: 10px;
+}
